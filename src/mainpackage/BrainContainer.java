@@ -6,10 +6,10 @@ public class BrainContainer {
 	public MovementLobe movlobe;
 	public PathingLobe pathinglobe;
 	
-	public BrainContainer(){
+	public BrainContainer(Body body){
 		 siglobe = new SignalTransferLobe();
 		 movlobe = new MovementLobe();
-		 pathinglobe = new PathingLobe();
+		 pathinglobe = new PathingLobe(body);
 	}
 
 }

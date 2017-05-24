@@ -26,7 +26,7 @@ public class Creature {
 		parent = AppletForCreature;
 		redcolor = parent.color(255, 0, 0);
 		body = new Body(200, 200, AppletForBody, 10, redcolor);
-		braincon = new BrainContainer();
+		braincon = new BrainContainer(body);
 		
 		
 		}

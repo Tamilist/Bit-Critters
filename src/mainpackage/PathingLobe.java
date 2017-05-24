@@ -7,9 +7,10 @@ public class PathingLobe {
 	public float pointx;
 	public float pointy;
 	
-	
-	public PathingLobe(){
-		
+	//Starts the creatures first target at its body location.
+	public PathingLobe(Body body){
+		pointx = body.getLocx();
+		pointy = body.getLocy();
 		
 	}
 	
