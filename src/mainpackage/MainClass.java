@@ -21,13 +21,11 @@ public class MainClass extends PApplet {
 		return winwidth;
 	}
 	
-	//Sets up the selection buttons for placing different elements.
-	
-	
+	CurrentMouseSelection curmouseselection = new CurrentMouseSelection();
 	
 	//Sets up the class that creates some basic elements for testing purposes.
 	
-	CreateCreatureAndElementsForTesting creaturetesting = new CreateCreatureAndElementsForTesting(this);
+	CreateCreatureAndElementsForTesting creaturetesting = new CreateCreatureAndElementsForTesting(this, mouseX, mouseY);
 	ButtonMenuBuilder bmb;
 	
 	public void settings(){
@@ -35,7 +33,13 @@ public class MainClass extends PApplet {
 	}
 	
 	public void mouseClicked(){
-		
+		if (mouseY > 40){
+			switch(curmouseselection.GetCurrentSelection()){
+				case 1:
+					creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY));
+					
+			}
+		}
 	}
 	
 	public void draw(){
@@ -47,12 +51,18 @@ public class MainClass extends PApplet {
 		creaturetesting.barrier.DisplayBarrier();
 		
 		creaturetesting.testfood.DisplayFood();
-		creaturetesting.creature.body.displaybody();
+		//Goes through the creaturelist and performs the display and checks for each one.
+		for(int i = 0; i < creaturetesting.creaturelist.size(); i++){
+			
+			creaturetesting.creaturelist.get(i).body.displaybody();
+			creaturetesting.creaturelist.get(i).braincon.pathinglobe.MoveBodyToPoint(creaturetesting.creaturelist.get(i).body);
+			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfAtDestination(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
+			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfOutOfBounds(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
+		}
 		
-		//makes the creature move to a set point.
-		creaturetesting.creature.braincon.pathinglobe.MoveBodyToPoint(creaturetesting.creature.body);
-		creaturetesting.creature.braincon.pathinglobe.CheckIfAtDestination(creaturetesting.creature.body, GetWinHeight(), GetWinWidth());
-		creaturetesting.creature.braincon.pathinglobe.CheckIfOutOfBounds(creaturetesting.creature.body, GetWinHeight(), GetWinWidth());
+		
+		
+		
 		
 	}
 
@@ -85,6 +95,10 @@ public class MainClass extends PApplet {
 		bmb.closemenubutton.hide();
 		
 		
+	}
+	//Sets the selection value to 1 for the creature.
+	public void Creature(){
+		curmouseselection.SetCurrentSelection(1);
 	}
 	
 	

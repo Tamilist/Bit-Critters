@@ -1,17 +1,23 @@
 package mainpackage;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class CreateCreatureAndElements {
 
+	ArrayList<Creature> creaturelist = new ArrayList<Creature>();
 	public CreateCreatureAndElements(){
 		
 	}
 	//Sets up some simple elements for testing purposes.
-	public void MakeTestCreatureAndElements(PApplet p){
+	public void MakeTestCreatureAndElements(PApplet p, int mouselocx, int mouselocy){
 		
+		
+		creaturelist.add(new Creature(p, p, mouselocx, mouselocy));
 		Dot dot = new Dot(p, 50, 50, 100);
-		Creature creature = new Creature(p, p);
+		
 		Food testfood = new Food(p, 50, 50, 10);
 	}
 }
