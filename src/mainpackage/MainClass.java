@@ -66,9 +66,11 @@ public class MainClass extends PApplet {
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.MoveBodyToPoint(creaturetesting.creaturelist.get(i).body);
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfAtDestination(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfOutOfBounds(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
+			//Checks if the criiter is touching a barrier then moves it away in the proper direction. Not yet finished.
+			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfCloseToObject(this, creaturetesting.creaturelist.get(i).body, creaturetesting.barrierlist);
 		}
 		
-for(int i = 0; i < creaturetesting.barrierlist.size(); i++){
+         for(int i = 0; i < creaturetesting.barrierlist.size(); i++){
 			
 	creaturetesting.barrierlist.get(i).DisplayBarrier(creaturetesting.barrierlist.get(i).getXlocation(), creaturetesting.barrierlist.get(i).getYlocation() );
 		}

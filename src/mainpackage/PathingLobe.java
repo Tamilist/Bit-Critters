@@ -1,6 +1,9 @@
 package mainpackage;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import processing.core.PApplet;
 
 public class PathingLobe {
 
@@ -16,6 +19,10 @@ public class PathingLobe {
 	
 	public void PerformStatusChecks(){
 		
+	}
+	
+	public void MoveBodyBack(Body body){
+		pointx = body.getLocx() - 5;
 	}
 	
 	public void MoveBodyToPoint(Body body){
@@ -76,6 +83,29 @@ public class PathingLobe {
 			pointy = (float) rannumfrommap;
 		}	
 	
-}
+    }
+	
+	public void CheckIfCloseToObject(PApplet p, Body body, ArrayList<Barrier> barrierlist){
+		for (int i = 0; i < barrierlist.size(); i++){
+			if (p.dist((int)body.getLocx(), (int)body.getLocy(), barrierlist.get(i).getXlocation(), barrierlist.get(i).getYlocation()) <= 50){
+				if (body.getLocx() < barrierlist.get(i).getXlocation()){
+					pointx = body.getLocx() - 15;
+				}
+			if (body.getLocx() > barrierlist.get(i).getXlocation()){
+				pointx = body.getLocx() + 15;
+				
+					}
+			
+			if (body.getLocy() > barrierlist.get(i).getYlocation()){
+				
+				pointy = body.getLocy() - 15;
+				}
+			
+			if (body.getLocy() < barrierlist.get(i).getYlocation()){
+				pointy = body.getLocy() + 15;
+			
+			}
+		} 
 	}
+}}
 
