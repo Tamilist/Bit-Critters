@@ -32,19 +32,24 @@ public class MainClass extends PApplet {
 		size(600, 600);
 	}
 	
+	//Decides what to place by checking the currentselection value.
 	public void mouseClicked(){
-		if (mouseY > 40){
+		if (mouseY >= 70){
 		if (curmouseselection.GetCurrentSelection() == 2){
 			
 			creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY));
 			
 			}
-		else if(curmouseselection.GetCurrentSelection() == 1) {
+		if(curmouseselection.GetCurrentSelection() == 1) {
 			creaturetesting.barrierlist.add(new Barrier(this, mouseX-10, mouseY-10, 20, 20));
 			}
 		}
+		if(curmouseselection.GetCurrentSelection() == 3) {
+			if (mouseY >= 70){
+			creaturetesting.foodlist.add(new Food(this, mouseX, mouseY, 5));
+			}
+		}
 		
-		else {}
 	}
 	
 	public void draw(){
@@ -52,21 +57,29 @@ public class MainClass extends PApplet {
 		//sets the background color.
 		background(135, 206, 250);
 		
-		//displays the graphics for the creatures and other elements like food and barriers.
+		//displays the graphics for the critters and other elements like food and barriers.
 		
 		
-		creaturetesting.testfood.DisplayFood();
+		
 		//Goes through the creaturelist and performs the display and checks for each one.
-		
 		
 		for(int i = 0; i < creaturetesting.creaturelist.size(); i++){
 			
 			creaturetesting.creaturelist.get(i).body.displaybody();
 			
+			//If the critters hunger is low, it will move towards a peice
+			if (creaturetesting.creaturelist.get(i).getHungerlevel() <= 5){
+				creaturetesting.creaturelist.get(i).braincon.pathinglobe.SetPointsToFood(creaturetesting.creaturelist.get(i).body, creaturetesting.foodlist);
+			}	
+			//Decrements the critter hunger over time
+			creaturetesting.creaturelist.get(i).DecrementHunger();
+			//Check if the critter has arrived at the food.
+			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfOverFood(creaturetesting.creaturelist.get(i), creaturetesting.foodlist);
+			
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.MoveBodyToPoint(creaturetesting.creaturelist.get(i).body);
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfAtDestination(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfOutOfBounds(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
-			//Checks if the criiter is touching a barrier then moves it away in the proper direction. Not yet finished.
+			//Checks if the critter is touching a barrier then moves it away in the proper direction. Not yet finished.
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfCloseToObject(this, creaturetesting.creaturelist.get(i).body, creaturetesting.barrierlist);
 		}
 		
@@ -74,6 +87,10 @@ public class MainClass extends PApplet {
 			
 	creaturetesting.barrierlist.get(i).DisplayBarrier(creaturetesting.barrierlist.get(i).getXlocation(), creaturetesting.barrierlist.get(i).getYlocation() );
 		}
+         
+         for(int i = 0; i < creaturetesting.foodlist.size(); i++){
+        	 creaturetesting.foodlist.get(i).DisplayFood();
+         }
 		
 		
 		
@@ -119,6 +136,9 @@ public class MainClass extends PApplet {
 	public void Barrier(){
 		curmouseselection.SetCurrentSelection(1);
 	}
+	 public void Food(){
+		 curmouseselection.SetCurrentSelection(3);
+	 }
 	
 	
 	

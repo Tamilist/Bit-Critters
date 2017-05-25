@@ -14,7 +14,7 @@ public class Food {
 	//Sets up the foods color and other properties.
 	public Food(PApplet P, float Xloc, float Yloc, int Size){
 		parent = P;
-		foodcolor = parent.color(0, 255, 0);
+		foodcolor = parent.color(0, 128, 0);
 		xlocation = Xloc;
 		ylocation = Yloc;
 		size = Size;
@@ -24,6 +24,19 @@ public class Food {
 		parent.fill(foodcolor);
 		parent.noStroke();
 		parent.ellipse(xlocation, ylocation, size, size);
+	}
+	
+	public float getXlocation() {
+		return xlocation;
+	}
+	public void setXlocation(float xlocation) {
+		this.xlocation = xlocation;
+	}
+	public float getYlocation() {
+		return ylocation;
+	}
+	public void setYlocation(float ylocation) {
+		this.ylocation = ylocation;
 	}
 	
 }

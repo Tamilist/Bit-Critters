@@ -16,7 +16,7 @@ public class PathingLobe {
 		pointy = body.getLocy();
 		
 	}
-	
+	//Unimplemented.
 	public void PerformStatusChecks(){
 		
 	}
@@ -41,7 +41,16 @@ public class PathingLobe {
 	    if (pointy < body.getLocy()){
 	    	body.setLocy(body.getLocy() - 1);
 	    }
-	    //Checks if the creature  reached its target destination.
+	    
+	    
+	}
+	
+	//Sets the critters destination to a peice of food.
+	public void SetPointsToFood(Body body, ArrayList<Food> foodlist){
+	    if (foodlist.isEmpty() == false){
+	    pointx = foodlist.get(0).getXlocation();
+	    pointy = foodlist.get(0).getYlocation();
+	    }
 	    
 	}
 	
@@ -85,9 +94,20 @@ public class PathingLobe {
 	
     }
 	
+	//Compares the creatures body x and y to the foods x and y.
+	public void CheckIfOverFood(Creature creature, ArrayList<Food> foodlist){
+		for (int i = 0; i < foodlist.size(); i++){
+			if (creature.body.getLocx() == foodlist.get(i).getXlocation() && creature.body.getLocy() == foodlist.get(i).getYlocation()){
+				foodlist.remove(i);
+				creature.setHungerlevel(500);
+			}
+		}
+	}
+	
+	//The code for avoiding objects like barriers.
 	public void CheckIfCloseToObject(PApplet p, Body body, ArrayList<Barrier> barrierlist){
 		for (int i = 0; i < barrierlist.size(); i++){
-			if (p.dist((int)body.getLocx(), (int)body.getLocy(), barrierlist.get(i).getXlocation(), barrierlist.get(i).getYlocation()) <= 50){
+			if (p.dist((int)body.getLocx(), (int)body.getLocy(), barrierlist.get(i).getXlocation(), barrierlist.get(i).getYlocation()) <= 35){
 				if (body.getLocx() < barrierlist.get(i).getXlocation()){
 					pointx = body.getLocx() - 15;
 				}

@@ -7,6 +7,7 @@ import processing.core.PApplet;
 public class Creature {
 	PApplet parent;
 	public int redcolor;
+	public int hungerlevel;
 	
 	
 	
@@ -27,9 +28,30 @@ public class Creature {
 		redcolor = parent.color(255, 0, 0);
 		body = new Body(locx, locy, AppletForBody, 10, redcolor);
 		braincon = new BrainContainer(body);
+		hungerlevel = 500;
 		
 		
 		}
+
+
+
+	public int getHungerlevel() {
+		return hungerlevel;
+	}
+
+
+
+	public void setHungerlevel(int hungerlevel) {
+		this.hungerlevel = hungerlevel;
+	}
+	
+	public void DecrementHunger(){
+		hungerlevel = hungerlevel - 1;
+		if (hungerlevel < 0){
+			hungerlevel = 0;
+		}
+	}
+	
 
 	
 }
