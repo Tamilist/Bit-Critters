@@ -15,7 +15,7 @@ public class CreateCreatureAndElements {
 	public void MakeTestCreatureAndElements(PApplet p, int mouselocx, int mouselocy){
 		
 		
-		creaturelist.add(new Creature(p, p, mouselocx, mouselocy));
+		
 		Dot dot = new Dot(p, 50, 50, 100);
 		
 		Food testfood = new Food(p, 50, 50, 10);

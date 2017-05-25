@@ -34,12 +34,17 @@ public class MainClass extends PApplet {
 	
 	public void mouseClicked(){
 		if (mouseY > 40){
-			switch(curmouseselection.GetCurrentSelection()){
-				case 1:
-					creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY));
-					
+		if (curmouseselection.GetCurrentSelection() == 2){
+			
+			creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY));
+			
+			}
+		else if(curmouseselection.GetCurrentSelection() == 1) {
+			creaturetesting.barrierlist.add(new Barrier(this, mouseX-10, mouseY-10, 20, 20));
 			}
 		}
+		
+		else {}
 	}
 	
 	public void draw(){
@@ -48,16 +53,24 @@ public class MainClass extends PApplet {
 		background(135, 206, 250);
 		
 		//displays the graphics for the creatures and other elements like food and barriers.
-		creaturetesting.barrier.DisplayBarrier();
+		
 		
 		creaturetesting.testfood.DisplayFood();
 		//Goes through the creaturelist and performs the display and checks for each one.
+		
+		
 		for(int i = 0; i < creaturetesting.creaturelist.size(); i++){
 			
 			creaturetesting.creaturelist.get(i).body.displaybody();
+			
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.MoveBodyToPoint(creaturetesting.creaturelist.get(i).body);
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfAtDestination(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
 			creaturetesting.creaturelist.get(i).braincon.pathinglobe.CheckIfOutOfBounds(creaturetesting.creaturelist.get(i).body, GetWinHeight(), GetWinWidth());
+		}
+		
+for(int i = 0; i < creaturetesting.barrierlist.size(); i++){
+			
+	creaturetesting.barrierlist.get(i).DisplayBarrier(creaturetesting.barrierlist.get(i).getXlocation(), creaturetesting.barrierlist.get(i).getYlocation() );
 		}
 		
 		
@@ -98,6 +111,10 @@ public class MainClass extends PApplet {
 	}
 	//Sets the selection value to 1 for the creature.
 	public void Creature(){
+		curmouseselection.SetCurrentSelection(2);
+	}
+	
+	public void Barrier(){
 		curmouseselection.SetCurrentSelection(1);
 	}
 	

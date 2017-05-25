@@ -9,15 +9,16 @@ import processing.core.PApplet;
 public class CreateCreatureAndElementsForTesting {
 
 	ArrayList<Creature> creaturelist = new ArrayList<>();
+	ArrayList<Barrier> barrierlist = new ArrayList<>();
 	
 	public Food testfood;
-	public Barrier barrier;
+	
 	public CreateCreatureAndElementsForTesting(PApplet p, int mouselocx, int mouselocy){
 		    
-		creaturelist.add(new Creature(p, p, mouselocx, mouselocy));
 		
+		barrierlist.add(new Barrier(p, 50, 120, 50, 50));
 		testfood = new Food(p, 50, 50, 10);
-		barrier = new Barrier(p, 20, 20, 50, 50);
+		
 		
 	
 	}
