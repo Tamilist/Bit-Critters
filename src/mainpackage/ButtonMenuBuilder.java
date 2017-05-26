@@ -21,7 +21,7 @@ public class ButtonMenuBuilder {
 		 menubutton = cp5.addButton("OpenMenu");
 	     menubutton.setValue(0)
 	     .setPosition(20,10)
-	     .setSize(40,20)
+	     .setSize(60,30)
 	     ;
 	     
 		 creaturebutton = cp5.addButton("Creature");
