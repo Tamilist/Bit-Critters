@@ -32,10 +32,11 @@ public class Body {
 		bodycolor = Bodycolor;
 	}
 	//Prints the body to the screen
-	public void displaybody(){
+	public void displaybody(Creature creature, PApplet p){
 		parent.fill(bodycolor);
 		parent.noStroke();
 		parent.ellipse(getLocx(), getLocy(), bodysize, bodysize);
+		p.text(creature.getName(), getLocx(), getLocy() + 10);
 	}
 
 	public float getLocx() {

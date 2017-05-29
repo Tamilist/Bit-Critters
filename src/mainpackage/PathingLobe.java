@@ -9,9 +9,11 @@ public class PathingLobe {
 
 	public float pointx;
 	public float pointy;
+	public boolean ishuntingfood;
 	
 	//Starts the creatures first target at its body location.
 	public PathingLobe(Body body){
+		ishuntingfood = false;
 		pointx = body.getLocx();
 		pointy = body.getLocy();
 		
@@ -47,10 +49,18 @@ public class PathingLobe {
 	
 	//Sets the critters destination to a peice of food.
 	public void SetPointsToFood(Body body, ArrayList<Food> foodlist){
+		Random rand = new Random();
+		//Checks if the huntingfood variable is true so it doesnt choose one each frame.
+		if (ishuntingfood == false){
 	    if (foodlist.isEmpty() == false){
-	    pointx = foodlist.get(0).getXlocation();
-	    pointy = foodlist.get(0).getYlocation();
+	    	int ranfoodchoice = rand.nextInt((int)foodlist.size());
+	    pointx = foodlist.get(ranfoodchoice).getXlocation();
+	    pointy = foodlist.get(ranfoodchoice).getYlocation();
+	    ishuntingfood = true;
 	    }
+	    
+	    else {ishuntingfood = false;}
+	}
 	    
 	}
 	

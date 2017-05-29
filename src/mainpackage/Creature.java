@@ -8,7 +8,7 @@ public class Creature {
 	PApplet parent;
 	public int redcolor;
 	public int hungerlevel;
-	
+	private String name;
 	
 	
 	//All of the different pieces that make up the creature.
@@ -20,7 +20,7 @@ public class Creature {
 	
 	//Contructor for creating the creature with the proper body parts. The parents of both
 	//the creature and body of the creature will be the main window.
-	public Creature(PApplet AppletForBody, PApplet AppletForCreature, int locx, int locy ){
+	public Creature(PApplet AppletForBody, PApplet AppletForCreature, int locx, int locy, String Name ){
 		
 		
 		//The body needs its location and parent PApplet set when its first created.
@@ -29,12 +29,17 @@ public class Creature {
 		body = new Body(locx, locy, AppletForBody, 10, redcolor);
 		braincon = new BrainContainer(body);
 		hungerlevel = 500;
+		name = Name;
 		
 		
 		}
 
 
 
+	public String getName(){
+		return name;
+	}
+	
 	public int getHungerlevel() {
 		return hungerlevel;
 	}

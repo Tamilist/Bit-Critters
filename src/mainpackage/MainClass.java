@@ -4,8 +4,12 @@
  * would work in a very simplistic way.*/
 
 package mainpackage;
+import java.io.IOException;
+import java.util.Random;
+
 import controlP5.*;
 import processing.core.PApplet;
+
 
 public class MainClass extends PApplet {
 	
@@ -13,20 +17,28 @@ public class MainClass extends PApplet {
 	private int winwidth  = 600;
 	private int winheight = 600;
 	
-	public int GetWinHeight(){
+	public int GetWinHeight(){ 
 		return winheight;
 	}
 	
 	public int GetWinWidth(){
 		return winwidth;
 	}
+	Random rand = new Random();
 	
+	
+	String[] namelist = new String[]{"Michael", "Sarah", "jennifer", "John", "Hannah", "Megan", "Charlie", 
+			"harold", "Joseph", "Katie", "Bob", "Leslie", "Frasier", "Niles", "Alucard", "George", "Will", 
+			"Walter", "Harry", "Seras", "Jordan", "Sally", "Sue", "Edward", "Jon", "Austin", "Rupert", 
+			"Wallace", "Urist", "Doge", "Ellen", "Richard", "Monica", "Ross", "Joey", "Rachael", "Phoebe", 
+			"Chandler", "Matthew", "Jack", "Gerald", "Mac", "Annabelle", "Gram", "Tarn", "Zach"};
 	CurrentMouseSelection curmouseselection = new CurrentMouseSelection();
 	
 	//Sets up the class that creates some basic elements for testing purposes.
 	
 	CreateCreatureAndElementsForTesting creaturetesting = new CreateCreatureAndElementsForTesting(this, mouseX, mouseY);
 	ButtonMenuBuilder bmb;
+	
 	
 	public void settings(){
 		size(600, 600);
@@ -37,7 +49,8 @@ public class MainClass extends PApplet {
 		if (mouseY >= 70){
 		if (curmouseselection.GetCurrentSelection() == 2){
 			
-			creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY));
+			//Sets up the  creature when the mouse is clicked and the proper button is selected.
+			creaturetesting.creaturelist.add(new Creature(this, this, mouseX, mouseY, namelist[rand.nextInt(namelist.length)]));
 			
 			}
 		if(curmouseselection.GetCurrentSelection() == 1) {
@@ -65,7 +78,7 @@ public class MainClass extends PApplet {
 		
 		for(int i = 0; i < creaturetesting.creaturelist.size(); i++){
 			
-			creaturetesting.creaturelist.get(i).body.displaybody();
+			creaturetesting.creaturelist.get(i).body.displaybody(creaturetesting.creaturelist.get(i), this);
 			
 			//If the critters hunger is low, it will move towards a peice
 			if (creaturetesting.creaturelist.get(i).getHungerlevel() <= 5){
@@ -103,6 +116,7 @@ public class MainClass extends PApplet {
 		fill(255, 255, 255);
 		//The object that handles creation of menus.
 		bmb = new ButtonMenuBuilder(this);
+		
 		
 	}
 	//The Open Menu button will call this function when clicked. Unfortunately these methods 
@@ -143,6 +157,7 @@ public class MainClass extends PApplet {
 	
 	
 	public static void main(String[] args) {
+		
 		
 		
 		PApplet.main("mainpackage.MainClass");
