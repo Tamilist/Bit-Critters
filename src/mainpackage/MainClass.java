@@ -116,6 +116,7 @@ public class MainClass extends PApplet {
 		fill(255, 255, 255);
 		//The object that handles creation of menus.
 		bmb = new ButtonMenuBuilder(this);
+		surface.setTitle("Bit Critters");
 		
 		
 	}

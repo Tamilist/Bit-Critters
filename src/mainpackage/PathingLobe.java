@@ -48,7 +48,7 @@ public class PathingLobe {
 	}
 	
 	//Sets the critters destination to a peice of food.
-	public void SetPointsToFood(Body body, ArrayList<Food> foodlist){
+	public Food SetPointsToFood(Body body, ArrayList<Food> foodlist){
 		Random rand = new Random();
 		//Checks if the huntingfood variable is true so it doesnt choose one each frame.
 		if (ishuntingfood == false){
